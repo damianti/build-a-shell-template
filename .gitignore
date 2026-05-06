@@ -1,0 +1,35 @@
+# CMake build output
+build/
+cmake-build-*/
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+install_manifest.txt
+CTestTestfile.cmake
+
+# Compiled binary
+myshell
+
+# Object files and static/shared libs
+*.o
+*.a
+*.so
+*.dylib
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# macOS
+.DS_Store
+
+# Instructor-only files
+instructor-notes.md
+*.docx
+
+# AI log (submitted as part of the assignment — do not gitignore if you want it tracked)
+# ai_log.md
