@@ -285,6 +285,18 @@ std::string findExecutable(const std::string& cmd);
 
 ---
 
+## What Not to Commit
+
+Your repository should contain only source files. Before submitting, make sure you have not committed:
+
+- Build output directories and generated files (CMake creates these when you build)
+- Compiled binaries and object files
+- Any file your editor or IDE generates automatically
+
+Use a `.gitignore` file to prevent these from being tracked. Figuring out which patterns to ignore is part of the exercise.
+
+---
+
 ## Final Notes
 
 - Keep functions short and focused on one task.
