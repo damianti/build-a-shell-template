@@ -7,11 +7,22 @@ The shell reads commands from the user, searches for the executable manually, an
 
 ---
 
+## Files you received
+
+| File | What it is |
+|------|------------|
+| `README.md` | Fill this in — it is part of your grade |
+| `exercise.md` | This file — the full assignment; read it before writing any code |
+| `AI_RULES.md` | Rules for your AI assistant; send it as your **first message** before asking for help — you do not need to read it yourself |
+| `PRACTICES.md` | C++ coding standards for this exercise; keep it open as a reference while coding |
+
+---
+
 ## Repository structure
 
 ```
 myshell/
-├── CMakeLists.txt
+├── CMakeLists.txt        ← you create this
 ├── src/
 │   └── main.cpp          ← your implementation
 └── README.md
@@ -28,9 +39,33 @@ cmake --build build
 
 ## Git Workflow
 
-- The `main` branch of your repository must remain **empty** (no code, no commits beyond the initial empty state).
-- Do all your work on one or more feature branches (e.g. `phase1`, `solution`).
-- When the exercise is complete, open **one Pull Request** from your finished branch to `main`. That PR is what will be graded.
+- The `main` branch must remain **empty** — no code, no commits beyond the initial state.
+- All work goes on a feature branch (e.g. `solution`, `phase1`).
+- When done, open **one** Pull Request from your branch to `main`. That PR is what will be graded.
+- Do not open multiple PRs.
+
+```bash
+# 1. Clone and enter the repo
+git clone <your-repo-url> && cd <repo-name>
+
+# 2. Create a feature branch
+git checkout -b solution
+
+# 3. Work and commit regularly
+git add src/main.cpp CMakeLists.txt
+git commit -m "implement fork/exec loop"
+
+# 4. Push your branch
+git push origin solution
+
+# 5. Open a PR on GitHub: solution → main. Leave it open — do not merge.
+```
+
+**Before submitting, verify:**
+- `main` branch has no code commits
+- Your PR is open (not merged, not draft)
+- `ai_log.md` is present in the root of your branch
+- Project builds: `cmake -S . -B build && cmake --build build`
 
 ---
 
@@ -103,16 +138,18 @@ Example: `echo $HOME` should print the home directory.
 - Build must succeed with `cmake -S . -B build && cmake --build build`
 - **Do not** use `execvp` or `execlp` — manual PATH search is required
 - **Do not** use `system(3)` — it uses `/bin/sh` internally
+- Code must follow the standards in `PRACTICES.md`
 
 ---
 
 ## AI and conversation log
 
-You may use AI assistants subject to the rules in `AI_RULES.md`.
-Give your AI the full text of `AI_RULES.md` as the **first message** before asking for any help.
+You may use AI assistants. Before asking for any help, send the full text of `AI_RULES.md` as your **first message** — the AI reads it, not you.
+
 Submit the full conversation as `ai_log.md` (or `ai_log.txt`) in the root of your repository.
 If you did not use AI, include `ai_log.md` with the single line: `No AI assistance used.`
-Submissions without an AI log will receive a **10-point deduction**.
+
+**Submissions without an AI log receive a 10-point deduction.**
 
 ---
 
