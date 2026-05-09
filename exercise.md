@@ -79,14 +79,11 @@ Your shell must display a prompt, read a line of input, execute the command, and
 
 Use `fork(2)` and `execv(2)` to launch each command in a child process. Wait for the child to finish with `waitpid(2)`. If `fork` fails, print an error to stderr and continue.
 
-### 3. Manual PATH search — `<filesystem>` required
+### 3. Manual PATH search
 
 **You must NOT use `execvp` or `execlp`** (functions that search PATH automatically).
-Instead, implement the search manually:
-- Split the `PATH` environment variable on `:`.
-- For each directory, construct the full path and check if the executable exists and is executable.
-- Use `std::filesystem` (`<filesystem>`, C++17) for path operations.
-- Support absolute paths (e.g. `/bin/echo hello`) and relative paths (e.g. `./myscript.sh`) directly, without searching PATH.
+Instead, implement the search manually using any POSIX or C++ standard library tools you choose.
+Support absolute paths (e.g. `/bin/echo hello`) and relative paths (e.g. `./myscript.sh`) directly, without searching PATH.
 
 ### 4. Arguments
 
@@ -105,8 +102,7 @@ For each, display:
 ```
 [<pid>] <command> <status>
 ```
-Where status is `Running` or `Done` (check with `waitpid(..., WNOHANG)`).
-Remove `Done` entries from the list after displaying them.
+Where status is `Running` or `Done`. Remove `Done` entries from the list after displaying them.
 
 ### 7. Built-in: `cd`
 
@@ -116,18 +112,17 @@ Make sure `cd ..` and `cd .` work correctly as relative paths.
 
 ---
 
-## Bonus (15 pts)
+## Bonus (+5 pts total)
 
-#### B1 — Environment variable expansion (10 pts)
+#### B1 — Environment variable expansion
 
 Before executing a command, expand `$VAR` and `${VAR}` references in arguments using the current environment.
 Example: `echo $HOME` should print the home directory.
 
-#### B2 — Command history (5 pts)
+#### B2 — Command history
 
-- Maintain a history of executed commands.
-- Save history to `~/.myshell_history` on exit; load it on startup.
-- Implement built-in `myhistory` — prints a numbered list of previous commands.
+- Every command entered (including invalid ones) is saved to a text file.
+- Implement built-in `myhistory` — displays the saved command history.
 
 ---
 
@@ -155,19 +150,4 @@ If you did not use AI, include `ai_log.md` with the single line: `No AI assistan
 
 ## Grading
 
-| Criterion | Points |
-|-----------|--------|
-| CMakeLists.txt present, project builds cleanly | 6 |
-| README.md (purpose, build/run instructions, file roles) | 4 |
-| `fork` + `execv` + `waitpid` + fork failure handling | 20 |
-| Manual PATH search using `std::filesystem` | 20 |
-| Arguments passed correctly to child process | 5 |
-| Background `&` + `myjobs` (Running/Done, cleanup) | 15 |
-| `cd` built-in (no fork, `$HOME`, error to stderr) | 15 |
-| Git workflow (branch, single PR, clean `main`) | 10 |
-| No use of `system(3)` / `execvp` / `execlp` | 5 |
-| **Total** | **100** |
-| Bonus B1 — environment variable expansion | +2.5 |
-| Bonus B2 — command history | +2.5 |
-
-See `../grading/rubric.json` for detailed criteria.
+All requirements above are graded. Completing both bonus features adds **5 extra points** to your final grade.

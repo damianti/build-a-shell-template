@@ -33,3 +33,4 @@ instructor-notes.md
 
 # AI log (submitted as part of the assignment — do not gitignore if you want it tracked)
 # ai_log.md
+*.docx

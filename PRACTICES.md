@@ -289,6 +289,6 @@ std::string findExecutable(const std::string& cmd);
 
 - Keep functions short and focused on one task.
 - Prefer `std::string` and `std::vector` over raw C arrays.
-- Use `std::filesystem` for all path operations (required by the assignment).
+- For path operations, use `std::filesystem`, `access(2)`, or `stat(2)` — any is acceptable.
 - Always `_exit(1)` in the child after a failed `execv` — never `return` or `exit`.
 - Print user-facing errors to `stderr`, not `stdout`.
