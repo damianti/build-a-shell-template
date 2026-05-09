@@ -101,12 +101,23 @@ builtin_commands.cpp
 
 ---
 
-## Exception and Error Handling
+## Error Handling in the REPL
 
-✅ **Throw specific exceptions with clear messages:**
+Errors inside the shell loop must be caught and reported — never let them crash the shell. The pattern: detect the error, print to `stderr`, and continue to the next command.
+
+✅ **Catch, report, and continue:**
 ```cpp
-if (!std::filesystem::exists(path)) {
-    throw std::runtime_error("cd: " + path + ": No such file or directory");
+try {
+    executeCommand(args);
+} catch (const std::exception& e) {
+    std::cerr << e.what() << '\n';
+}
+```
+
+✅ **Throw with a clear message so the catch can print it:**
+```cpp
+if (chdir(path.c_str()) != 0) {
+    throw std::runtime_error("cd: " + path + ": " + strerror(errno));
 }
 ```
 
